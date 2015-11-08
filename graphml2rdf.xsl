@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xsl:stylesheet    
-
+xmlns="http://vgibox.eu/"
   
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 xmlns:java="http://www.yworks.com/xml/yfiles-common/1.0/java" 
@@ -43,7 +43,6 @@ version="2.0">
 
 <xsl:template match="/"> 
    <rdf:RDF
-      xmlns="http://vgibox.eu/"
       xml:base="http://vgibox.eu/"
    >
      <xsl:apply-templates /> 
@@ -68,16 +67,18 @@ version="2.0">
        <!-- Class names is present, generate an rdf:type triple -->
    
        <xsl:if test="$cname != ''">
-         <xsl:text> 
+          <xsl:text> 
 
-        </xsl:text>
-         <rdf:type> <xsl:attribute name="rdf:resource"><xsl:value-of select="$cnameNoWS"/></xsl:attribute></rdf:type>
+          </xsl:text>
+          <rdf:type> <xsl:attribute name="rdf:resource"><xsl:value-of select="$cnameNoWS"/></xsl:attribute></rdf:type>
      
        </xsl:if>  
    
        <!-- Generate a label -->
-       
-         <rdfs:label><xsl:call-template name="node-name"><xsl:with-param name="nid" select="@id" /></xsl:call-template> </rdfs:label>
+       <xsl:text> 
+
+       </xsl:text>       
+       <rdfs:label><xsl:call-template name="node-name"><xsl:with-param name="nid" select="@id" /></xsl:call-template> </rdfs:label>
    </rdf:Description>
    
    
@@ -142,14 +143,14 @@ Principle:
    =====================
 -->
 <xsl:template match="def:edge">
-<xsl:text> 
-
-</xsl:text>
   
   <xsl:variable name="pname"  select="normalize-space(.//y:EdgeLabel)"/>
   <xsl:variable name="pid"  select="translate($pname,' ?','__')"/>
   
   <xsl:if test="$pid != ''">
+       <xsl:text> 
+
+       </xsl:text>
        <rdf:Description>
          <xsl:attribute name="rdf:about" ><xsl:call-template name="node-id"><xsl:with-param name="nid" select="@source" /></xsl:call-template></xsl:attribute>
      

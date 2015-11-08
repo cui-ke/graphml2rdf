@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><rdf:RDF xmlns="http://vgibox.eu/" xmlns:java="http://www.yworks.com/xml/yfiles-common/1.0/java" xmlns:sys="http://www.yworks.com/xml/yfiles-common/markup/primitives/2.0" xmlns:x="http://www.yworks.com/xml/yfiles-common/markup/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xmlns:yed="http://www.yworks.com/xml/yed/3" xmlns:def="http://graphml.graphdrawing.org/xmlns" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:base="http://vgibox.eu/"> 
+
+<rdf:Description rdf:about="ex-1/OSM"> 
+
+          <rdf:type rdf:resource="VGI-Based_System"/> 
+
+       <rdfs:label>OSM</rdfs:label></rdf:Description> 
+
+<rdf:Description rdf:about="ex-1/ga1"> 
+
+          <rdf:type rdf:resource="Geometry_Acquisition"/> 
+
+       <rdfs:label>ga1</rdfs:label></rdf:Description> 
+
+<rdf:Description rdf:about="ex-1/instance_n2"> 
+
+          <rdf:type rdf:resource="Desktop_Computer"/> 
+
+       <rdfs:label>instance_n2</rdfs:label></rdf:Description> 
+
+<rdf:Description rdf:about="ex-1/aa1"> 
+
+          <rdf:type rdf:resource="Attribute_Acquisition"/> 
+
+       <rdfs:label>aa1</rdfs:label></rdf:Description> 
+
+<rdf:Description rdf:about="ex-1/instance_n4"> 
+
+          <rdf:type rdf:resource="Map_Browsing"/> 
+
+       <rdfs:label>instance_n4</rdfs:label></rdf:Description> 
+
+<rdf:Description rdf:about="ex-1/dd1"> 
+
+          <rdf:type rdf:resource="Data_Description"/> 
+
+       <rdfs:label>dd1</rdfs:label></rdf:Description> 
+
+<rdf:Description rdf:about="ex-1/instance_n6"> 
+
+          <rdf:type rdf:resource="Geographic_Entities"/> 
+
+       <rdfs:label>instance_n6</rdfs:label></rdf:Description> 
+
+<rdf:Description rdf:about="ex-1/instance_n7"> 
+
+          <rdf:type rdf:resource="Geometry"/> 
+
+       <rdfs:label>instance_n7</rdfs:label></rdf:Description> 
+
+<rdf:Description rdf:about="ex-1/instance_n8"> 
+
+          <rdf:type rdf:resource="Attribute-Value_Pair"/> 
+
+       <rdfs:label>instance_n8</rdfs:label></rdf:Description> 
+
+<rdf:Description rdf:about="ex-1/instance_n9"> 
+
+          <rdf:type rdf:resource="Smartphone"/> 
+
+       <rdfs:label>instance_n9</rdfs:label></rdf:Description> 
+
+<rdf:Description rdf:about="ex-1/Sentiment"> 
+
+       <rdfs:label>Sentiment</rdfs:label></rdf:Description> 
+
+<rdf:Description rdf:about="ex-1/intance_n11"> 
+
+       <rdfs:label>intance_n11</rdfs:label></rdf:Description> 
+
+<rdf:Description rdf:about="ex-1/Vienna_Sentiment_Map"> 
+
+          <rdf:type rdf:resource="VGI-Based_System"/> 
+
+       <rdfs:label>Vienna Sentiment Map</rdfs:label></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/OSM"><userTask rdf:resource="ex-1/ga1"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/OSM"><userTask rdf:resource="ex-1/aa1"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/OSM"><hasData rdf:resource="ex-1/dd1"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/Vienna_Sentiment_Map"><hasData rdf:resource="ex-1/intance_n11"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/dd1"><dataType rdf:resource="ex-1/instance_n8"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/dd1"><dataType rdf:resource="ex-1/instance_n7"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/intance_n11"><informationType rdf:resource="ex-1/Sentiment"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/dd1"><informationType rdf:resource="ex-1/instance_n6"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/OSM"><userTask rdf:resource="ex-1/instance_n4"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/ga1"><equipment rdf:resource="ex-1/instance_n2"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/Vienna_Sentiment_Map"><sensingEquipment rdf:resource="ex-1/instance_n9"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/aa1"><equipment rdf:resource="ex-1/instance_n2"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/instance_n4"><equipment rdf:resource="ex-1/instance_n2"/></rdf:Description> 
+
+       <rdf:Description rdf:about="ex-1/instance_n4"><equipment rdf:resource="ex-1/instance_n9"/></rdf:Description></rdf:RDF>
