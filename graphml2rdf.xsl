@@ -25,6 +25,9 @@ version="2.0">
     G. Falquet, 2015
 -->
 
+<xsl:output indent="yes"/>
+
+
 <!-- take as prefix the last element of the base uri, i.e. the xml filename -->
 <xsl:param name="prefix" as="xs:string"><xsl:value-of select="substring-before(def:last-part(base-uri()),'.graphml')"/></xsl:param>
 
@@ -35,6 +38,7 @@ version="2.0">
              then def:last-part(substring-after($uri, '/'))
              else $uri"/>
 </xsl:function>
+
 
 <!-- output namespace -->
 
@@ -61,25 +65,19 @@ version="2.0">
 
 </xsl:text>
 
-   <rdf:Description>
-       <xsl:attribute name="rdf:about" ><xsl:call-template name="node-id"><xsl:with-param name="nid" select="@id" /></xsl:call-template></xsl:attribute>
+       <rdf:Description>
+		   <xsl:attribute name="rdf:about" ><xsl:call-template name="node-id"><xsl:with-param name="nid" select="@id" /></xsl:call-template></xsl:attribute>
+	   
+		   <!-- Class names is present, generate an rdf:type triple -->
+   
+		   <xsl:if test="$cname != ''">
+			  <rdf:type> <xsl:attribute name="rdf:resource"><xsl:value-of select="$cnameNoWS"/></xsl:attribute></rdf:type>	 
+		   </xsl:if>  
+   
+		   <!-- Generate a label -->
+		   <rdfs:label><xsl:call-template name="node-name"><xsl:with-param name="nid" select="@id" /></xsl:call-template> </rdfs:label>
        
-       <!-- Class names is present, generate an rdf:type triple -->
-   
-       <xsl:if test="$cname != ''">
-          <xsl:text> 
-
-          </xsl:text>
-          <rdf:type> <xsl:attribute name="rdf:resource"><xsl:value-of select="$cnameNoWS"/></xsl:attribute></rdf:type>
-     
-       </xsl:if>  
-   
-       <!-- Generate a label -->
-       <xsl:text> 
-
-       </xsl:text>       
-       <rdfs:label><xsl:call-template name="node-name"><xsl:with-param name="nid" select="@id" /></xsl:call-template> </rdfs:label>
-   </rdf:Description>
+       </rdf:Description>
    
    
 
@@ -107,8 +105,13 @@ Principle:
   <xsl:variable name="cname" 
     select="normalize-space(//def:node[@id=$nid]//y:NodeLabel[@configuration='com.yworks.entityRelationship.label.name'])"/>
   <xsl:variable name="iname" select="normalize-space(//def:node[@id=$nid]//y:NodeLabel[@configuration='com.yworks.entityRelationship.label.attributes'])"/>
+  <xsl:variable name="lit-name" 
+    select="normalize-space(//def:node[@id=$nid]//y:GenericNode[@configuration='com.yworks.entityRelationship.small_entity']/y:NodeLabel)"/>
   <xsl:choose>
-     <xsl:when test="string-length($cname) = 0">
+     <xsl:when test="$lit-name != ''">
+        <xsl:value-of select="concat('isLiteral---',$lit-name)"/>
+     </xsl:when>
+     <xsl:when test="$cname != ''">
         <xsl:if test="$iname != ''"><xsl:value-of select="$iname"/>
         </xsl:if>
         <xsl:if test="$iname = ''"><xsl:value-of select="concat('intance_',$nid)"/>
@@ -127,7 +130,7 @@ Principle:
 
 <!--
 ===============================
-           Node uri
+           Node id
 ===============================
 -->
 <xsl:template name="node-id">
@@ -148,23 +151,29 @@ Principle:
   <xsl:variable name="pid"  select="translate($pname,' ?','__')"/>
   
   <xsl:if test="$pid != ''">
-       <xsl:text> 
+<xsl:text> 
 
-       </xsl:text>
+</xsl:text>
+       <xsl:variable name="targ-id"><xsl:call-template name="node-name"><xsl:with-param name="nid" select="@target" /></xsl:call-template></xsl:variable>
+       
        <rdf:Description>
          <xsl:attribute name="rdf:about" ><xsl:call-template name="node-id"><xsl:with-param name="nid" select="@source" /></xsl:call-template></xsl:attribute>
      
-     
          <xsl:element name="{$pid}" >
+            <xsl:choose>
+               <xsl:when test="starts-with($targ-id,'isLiteral---')"><xsl:value-of select="substring-after($targ-id,'isLiteral---')"/></xsl:when>
+               <xsl:otherwise>
                <xsl:attribute name="rdf:resource" ><xsl:call-template name="node-id"><xsl:with-param name="nid" select="@target" /></xsl:call-template></xsl:attribute>
-   
+               </xsl:otherwise>
+            </xsl:choose>
          </xsl:element> 
-      </rdf:Description>
+         
+       </rdf:Description>
   
       <xsl:if test="$pname != $pid">
-         <xsl:text> 
+<xsl:text> 
 
-         </xsl:text>
+</xsl:text>
          <rdf:Description>
             <xsl:attribute name="rdf:about" ><xsl:value-of select="$pid"/></xsl:attribute>
             <rdfs:label><xsl:value-of select="$pname"/></rdfs:label>

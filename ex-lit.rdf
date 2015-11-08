@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns="http://vgibox.eu/"
+         xmlns:java="http://www.yworks.com/xml/yfiles-common/1.0/java"
+         xmlns:sys="http://www.yworks.com/xml/yfiles-common/markup/primitives/2.0"
+         xmlns:x="http://www.yworks.com/xml/yfiles-common/markup/2.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:y="http://www.yworks.com/xml/graphml"
+         xmlns:yed="http://www.yworks.com/xml/yed/3"
+         xmlns:def="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xml:base="http://vgibox.eu/"> 
+
+   <rdf:Description rdf:about="ex-lit/my_phone">
+      <rdf:type rdf:resource="Phone"/>
+      <rdfs:label>my phone</rdfs:label>
+   </rdf:Description> 
+
+   <rdf:Description rdf:about="ex-lit/me">
+      <rdf:type rdf:resource="Person"/>
+      <rdfs:label>me</rdfs:label>
+   </rdf:Description> 
+
+   <rdf:Description rdf:about="ex-lit/another_phone">
+      <rdf:type rdf:resource="Phone"/>
+      <rdfs:label>another phone</rdfs:label>
+   </rdf:Description> 
+
+   <rdf:Description rdf:about="ex-lit/instance_n5">
+      <rdfs:label>instance_n5</rdfs:label>
+   </rdf:Description> 
+
+   <rdf:Description rdf:about="ex-lit/my_phone">
+      <price>45</price>
+   </rdf:Description> 
+
+   <rdf:Description rdf:about="ex-lit/my_phone">
+      <owner rdf:resource="ex-lit/me"/>
+   </rdf:Description> 
+
+   <rdf:Description rdf:about="ex-lit/my_phone">
+      <color>white</color>
+   </rdf:Description> 
+
+   <rdf:Description rdf:about="ex-lit/another_phone">
+      <color>white</color>
+   </rdf:Description> 
+
+   <rdf:Description rdf:about="ex-lit/my_phone">
+      <weight rdf:resource="ex-lit/instance_n5"/>
+   </rdf:Description> 
+
+   <rdf:Description rdf:about="ex-lit/instance_n5">
+      <unit>Kg</unit>
+   </rdf:Description> 
+
+   <rdf:Description rdf:about="ex-lit/instance_n5">
+      <value>0.125</value>
+   </rdf:Description>
+</rdf:RDF>
