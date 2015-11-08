@@ -6,6 +6,8 @@ The graph must be composed of 'Entity with Attributes' nodes (from the Entity-Re
 
   - the Entity field (top) must contain a class name (or empty)
   - the Attributes field (bottom) must contain an instance name (or empty)
+
+See the file _ex-1.graphml_ for an example.
   
 To run the transformation tool
 
