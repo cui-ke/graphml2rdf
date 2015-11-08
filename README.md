@@ -22,4 +22,4 @@ The output file is an RDF/XML file. It can be directly uploaded into a triple st
 
  ![transformation principles](graphml2rdf_Principles.png)
 
-The instance names generate "local" URIs, based on the input file name.  Thus several generated RDF files can be uploaded in an endpoint without mixing up the instance names. The class names generate "global" URIs, independent of the source file. So the same class name appearing in different graphml graphs will generate the same URI. In this sense class names are global.
+The instance names generate "local" URIs, based on the input file name.  Thus several generated RDF files can be uploaded to a repository without mixing up the instance names. The class names generate "global" URIs, independent of the source file. So the same class name appearing in different graphml graphs will generate the same URI. In this sense class names are global.
