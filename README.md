@@ -18,5 +18,6 @@ Download the Saxon xml library (saxon9he.jar from ...)
    
 ### Transformation principles
 
- !(graphml2rdf_Principles.png)
+ ![transformation principles](graphml2rdf_Principles.png)
 
+The instance names generate "local" URIs, based on the input file name.  Thus several generated RDF files can be uploaded in an endpoint without mixing up the instance names. The class names generate "global" URIs, so all class names refer to the same set of classes, independent of the source file.
