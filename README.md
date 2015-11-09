@@ -2,12 +2,16 @@
 
 This xsl stylesheets transforms a graphml file produced by yEd using the Entity-Relationship elements into an RDF graph.
 
-The graph must be composed of 'Entity with Attributes' nodes (from the Entity-Relationship palette in yEd)
+The graph must be composed of _Entity with Attributes_ or _Entity_ nodes (from the Entity-Relationship palette in yEd). For _Entity with Attributes_ nodes
 
   - the Entity field (top) must contain a class name (or empty)
   - the Attributes field (bottom) must contain an instance name (or empty)
 
 See the file _ex-1.graphml_ for an example.
+
+_Entity_ nodes represent literal values. The node label must contain the value without quotes. Literal types are not supportent yet.
+
+See the file _ex-lit.graphml_ for an example.
   
 To run the transformation tool
 
