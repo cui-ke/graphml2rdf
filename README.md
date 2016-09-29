@@ -1,4 +1,4 @@
-# graphml2rdf
+# graphml2rdf: a Graphml to RDF translator
 
 This xsl stylesheets transforms a graphml file produced by yEd using the Entity-Relationship elements into an RDF graph.
 
