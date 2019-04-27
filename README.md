@@ -1,4 +1,39 @@
-# graphml2rdf: a Graphml to RDF translator
+## graphml/Entity Relationship to OWL
+
+This python script takes as input a graphml file, produced with the yEd graph editor,
+that contains 'Entity with Attributes' nodes and labelled edges. It translates it
+into an OWL ontology in RDF/Turtle format.
+
+The translation rules are:
+
+- every 'Entity with Attributes' node with label C is transformed into a OWL class C
+- an edge with label 'subClassOf' from C to D ---> an axiom 
+
+         :C rdfs:subClassOf :D
+         
+- an edge with label P from C to D ---> an axiom 
+
+         :C rdfs:subClassOf [a owl:Restriction ; owl:onProperty :P ; owl:allValuesFrom :D]
+         
+- an edge with a label of the form 'P min 1' from C to D ---> an axiom 
+
+         :C rdfs:subClassOf [a owl:Restriction ; owl:onProperty :P ; owl:someValuesFrom :D]
+ 
+ - the second label (in the attribute box of the node) is considered as a comment. It yields
+ 
+         :C rdfs:comment Text-of-the-attribute-box
+         
+### Usage: 
+
+$ python graphml2owl.py graphmlfile
+
+The OWL ontology is written into graphmlfile_owl.ttl
+
+!! requires python 3.7 (uses type annotations)
+
+
+     
+## graphml2rdf: a Graphml to RDF translator
 
 This xsl stylesheets transforms a graphml file produced by yEd using the Entity-Relationship elements into an RDF graph.
 
