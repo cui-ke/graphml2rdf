@@ -27,11 +27,33 @@ G. Falquet 2019
 import xml.etree.ElementTree as ET
 import re
 import sys
+import urllib.parse
 from typing import List, FrozenSet, Dict
 
-# usage = python graphml2owl.py file.graphml
+# usage = python graphml2owl.py -o file.graphml -p URIprefix
+if len(sys.argv) < 2 :
+    sys.exit("Usage: python graphml2owl.py graphml-file [-o ontoloy-file] [-p ontoURI]")
 ifileName = sys.argv[1]
-ofileName = sys.argv[1]+"_owl.ttl"
+ofileName = sys.argv[1]+".ttl"
+ontoURI = "http://a.ontology/myonto"
+i = 2
+imax = len(sys.argv)
+while i < imax:
+    ar = sys.argv[i]
+    if ar == "-o" :
+        i = i+1
+        if i < imax :
+            ofileName = sys.argv[i]
+        else:
+            print("-o ignored")
+    elif ar == "-p" :
+        i = i+1
+        if i < imax :
+            ontoURI = sys.argv[i]
+        else:
+            print("-p ignored")
+    i = i+1
+
 print('Output to '+ofileName)
 sys.stdout = open(ofileName, 'w')
 
@@ -41,8 +63,8 @@ ns = {'g': 'http://graphml.graphdrawing.org/xmlns',
 
 root: ET.Element = ET.parse(ifileName).getroot()
 
-print("""
-@prefix : <http://cs-eu.net/onto#> .
+print(f"""
+@prefix : <{ontoURI}#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -51,10 +73,11 @@ print("""
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
+@base <{ontoURI}> .
 """)
 
 print(f"""
-<http://cs-eu.net/{ofileName}> rdf:type owl:Ontology .
+<{ontoURI}> rdf:type owl:Ontology .
 
 """)
 
@@ -69,6 +92,8 @@ for n in root.findall('.//g:node',ns):
         clsLabel: ET.Element = nodeLabels[0]
         nodeId = n.get('id')
         clsName = clsLabel.text
+        if clsName is None : clsName = "noName"
+        if clsName == "" : clsName = "noName"
         clsName = re.sub(r'[^a-z^A-Z^0-9^-^:]', '_', clsName)
         classNames = classNames.union({clsName})
         classNameOfNode[nodeId] = clsName
@@ -100,6 +125,8 @@ for e in root.findall('.//g:edge',ns) :
 
    if edgeLabel != None : label = edgeLabel.text 
 
+   # restrictionType = 'owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ; owl:onClass'
+   # replaced 'owl:allValuesFrom'
    restrictionType = 'owl:allValuesFrom'
    #  edge labels of the form 'propertyName min 1' 
    if len(re.findall(r' min 1$', label)) > 0 :
